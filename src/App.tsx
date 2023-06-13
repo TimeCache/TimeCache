@@ -1,11 +1,17 @@
 import React = require("react")
+import Capsule from "./Capsule"
+import './index.css'
+
 
 export default function App() {
-  // do some stuff
+  // successful auth here routes to Capsule page
 
   return (
     <div>
-      some changed text, yooo
+      <nav>
+      welcome to Time Cache
+      </nav>
+      <Capsule/>
     </div>
   )
 }
