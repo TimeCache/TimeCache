@@ -20,7 +20,8 @@ CREATE TABLE timeCapsules (
   recipientEmail VARCHAR(255) NOT NULL,
   recipientPhone VARCHAR(15),
   dueDate TIMESTAMP NOT NULL,
---   input text
--- access code 
+  inputText VARCHAR(255),
+  accessCode VARCHAR(255) NOT NULL,
+  status VARCHAR(255) DEFAULT 'pending';
   FOREIGN KEY (userId) REFERENCES users(id)
 );
