@@ -5,14 +5,17 @@
     "build": "webpack"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.5",
     "@types/react": "^18.2.12",
     "@types/react-dom": "^18.2.5",
     "@types/react-redux": "^7.1.25",
+    "css-loader": "^6.8.1",
     "nodemon": "^2.0.22",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.7",
-    "redux": "^4.2.1"
+    "redux": "^4.2.1",
+    "style-loader": "^3.3.3"
   },
   "devDependencies": {
     "@babel/preset-react": "^7.22.5",
