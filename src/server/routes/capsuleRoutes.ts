@@ -18,6 +18,8 @@ router.get('/', capsuleController.getMyCapsule, async (req, res) => {
 
 router.post('/', capsuleController.ensureAuthenticated, capsuleController.generateAccessCode, capsuleController.saveToDatabase, capsuleController.sendToS3, capsuleController.activateCountdown, async (req, res) => {
 
+    console.log('in the middleware for capsule POST', req.body)
+
     // table info needed: 
         // userId INT NOT NULL,
         // capsuleName VARCHAR(255) NOT NULL
