@@ -4,28 +4,42 @@ import './index.css'
 export default function Capsule() {
   // some stuff
 
+  function submit(event: any){
+    event.preventDefault()
+    console.log(event.target.name.value, event.target.setDate.value)
+  }
+
   return (
     <div>
-      <div>
-        <form>
-        <label>
+      <div className="flex justify-center">
+        <form onSubmit={submit} className="join join-vertical">
+          <div className="p-3">
+        <label className="font-mono">
             Recipient Name
-            <input type="text" name="name"></input>
+            <input type="text" id="name" className="input input-bordered input-secondary w-full max-w-xs"></input>
           </label>
-          <label>
+          </div>
+          <div className="p-3">
+          <label className="font-mono">
             Message
-            <input type="text" name="message"></input>
+            <input type="text" id="message" className="input input-bordered input-secondary w-full max-w-xs"></input>
           </label>
-          <label>
+          </div>
+          <div className="p-3">
+          <label className="font-mono">
             Set Date
-            <input type="date" name="setDate"></input>
+            <input type="date" id="setDate" className="input input-bordered input-secondary w-full max-w-xs"></input>
           </label>
-          <label>
-            Upload
-            <input type="file" name="file"></input>
+          </div>
+          <div className="p-3">
+          <label className="font-mono">
+            <input type="file" id="file" className="file-input file-input-bordered file-input-secondary w-full max-w-xs"></input>
           </label>
-            {/* <input type="submit" value="Create New Capsule" className="btn btn-outline btn-secondary"></input> */}
-            <button className="btn btn-outline">Default</button>
+          </div>
+          <div className="p-3">
+            <input type="submit" value="Create New Capsule" className="btn btn-outline btn-secondary">
+            </input>
+          </div>
         </form>
       </div>
     </div>
