@@ -5,6 +5,7 @@
     "build": "webpack"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.5",
     "@types/react": "^18.2.12",
     "@types/react-dom": "^18.2.5",
     "@types/react-redux": "^7.1.25",

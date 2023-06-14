@@ -1,11 +1,11 @@
-import React = require("react")
-
+import React from "react";
+import Home from "./pages/Home";
 export default function App() {
-  // do some stuff
+
 
   return (
     <div>
-      some changed text, yooo
+      <Home />
     </div>
   )
 }
