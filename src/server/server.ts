@@ -51,11 +51,10 @@ app.use(session({
   
 
 
-// These serialize and deserialize functions are used by Passport to manage session data. 
-// You can customize them based on your needs.
+// "These serialize and deserialize functions are used by Passport to manage session data."
 passport.serializeUser((user, done) => {
-    console.log(user)  // Check the structure of your user object
-    done(null, user.id);  // Make sure user.id is a valid property
+    // console.log(user) 
+    done(null, user.id); 
 });
 
 passport.deserializeUser(async (id, done) => {

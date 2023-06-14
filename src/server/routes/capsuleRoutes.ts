@@ -1,6 +1,8 @@
 import express from 'express';
 import pool from '../db';
 import { capsuleController } from '../controllers/capsuleController';
+import passport from 'passport';
+
 
 
 const router = express.Router();
@@ -14,7 +16,7 @@ router.get('/', capsuleController.getMyCapsule, async (req, res) => {
     // send the capsule info to s3 with the id of the capsule as a tag
     // activate the capsule countdown via twillio
 
-router.post('/', capsuleController.generateAccessCode, capsuleController.saveToDatabase, capsuleController.sendToS3, capsuleController.activateCountdown, async (req, res) => {
+router.post('/', capsuleController.ensureAuthenticated, capsuleController.generateAccessCode, capsuleController.saveToDatabase, capsuleController.sendToS3, capsuleController.activateCountdown, async (req, res) => {
 
     console.log('in the middleware for capsule POST', req.body)
 
