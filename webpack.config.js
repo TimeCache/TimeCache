@@ -32,19 +32,17 @@ module.exports = {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: './src/index.html',
-    }),
-  ],
   devServer: {
-    static: {
-      directory: path.join(__dirname, './dist')
-    },
+    historyApiFallback: true,
+    port: 8080,
     proxy: {
-      '/': 'http://localhost:3000',
-      secure: false
-    }
-  },
-  devtool: 'source-map',
+        '/': 'http://localhost:3000/'
+    },
+    hot: true,
+},
+plugins: [
+    new HtmlWebpackPlugin({ // install and require
+        template: './src/index.html'
+    }),
+],
 };
