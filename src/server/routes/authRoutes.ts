@@ -12,9 +12,12 @@ router.get('/google/callback', passport.authenticate('google', { failureRedirect
     (req:any, res) => {
       console.log('logged in!');
       console.log(req.user)
-      res.redirect('/capsules');
+
+      if (req.user) {
+        res.cookie('user', JSON.stringify({ id: req.user.id }), { httpOnly: false });
+      }
+      res.redirect('/');
     }
   );
-  
 
 export default router;
