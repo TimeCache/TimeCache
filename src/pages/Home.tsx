@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import Login from '../components/login/Login';
 import AccessCode from '../components/accessCode/AccessCode';
-import UploadPage from './Upload';
+// import UploadPage from './Upload';
 import FetchS3 from './FetchS3';
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import axios from 'axios';
@@ -71,7 +71,7 @@ const HomePage: React.FC = () => {
         <button onClick={handleContactSubmit}>Send</button>
       </main>
       <FetchS3/>
-      {loaded && <Capsule/>}
+      {/* {loaded && <Capsule/>} */}
       <div>
         <Capsule/>
       </div>
