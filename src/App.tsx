@@ -15,11 +15,13 @@ export default function App() {
       console.error('Error parsing user cookie', error);
     }
   } else {
-    user = cookies.user;  // If 'user' cookie is already an object
+    user = cookies.user;
+    console.log(user);  // If 'user' cookie is already an object
   }
 
   return (
     <div>
+      
       <div className="navbar bg-base-100">
         <div className="flex-1">
           <a className="btn btn-ghost normal-case text-xl">Welcome to Time Cache</a>
