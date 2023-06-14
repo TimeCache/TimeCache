@@ -1,13 +1,27 @@
-import React = require("react")
-import Capsule from "./Capsule"
-import './index.css'
-
+import React from 'react';
+import { useCookies } from 'react-cookie';
+import Capsule from './Capsule';
 
 export default function App() {
-  // successful auth here routes to Capsule page
+  const [cookies] = useCookies(['user']);
+
+  // Check if 'user' cookie exists and if it's an object before trying to parse it
+  let user = null;
+
+  if (cookies.user && typeof cookies.user === 'string') {
+    try {
+      user = JSON.parse(cookies.user);
+    } catch (error) {
+      console.error('Error parsing user cookie', error);
+    }
+  } else {
+    user = cookies.user;
+    console.log(user);  // If 'user' cookie is already an object
+  }
 
   return (
     <div>
+      
       <div className="navbar bg-base-100">
         <div className="flex-1">
           <a className="btn btn-ghost normal-case text-xl">Welcome to Time Cache</a>
@@ -18,8 +32,8 @@ export default function App() {
           </button>
         </div>
       </div>
-      <Capsule/>
       <a href="http://localhost:3000/auth/google">Sign In with Google</a>
+      {user ? <Capsule/> : null}
 
     </div>
   )
