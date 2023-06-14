@@ -76,7 +76,7 @@ export default function Capsule() {
           <div className="p-3">
         <label className="font-mono">
           Recipient Phone
-            <input type="tel" name="phone" className="input input-bordered input-secondary w-full max-w-xs"></input>
+            <input type="tel" name="recipientPhone" className="input input-bordered input-secondary w-full max-w-xs"></input>
           </label>
           </div>
           <div className="p-3">
@@ -88,7 +88,7 @@ export default function Capsule() {
           <div className="p-3">
           <label className="font-mono">
             Set Date
-            <input type="date" name="setDate" className="input input-bordered input-secondary w-full max-w-xs"></input>
+            <input type="date" name="dueDate" className="input input-bordered input-secondary w-full max-w-xs"></input>
           </label>
           </div>
           <div className="p-3">
