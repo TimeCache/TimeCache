@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import './index.css'
+import React = require("react")
+import { useState } from "react";
+import './styles/index.css'
 
 export default function Capsule() {
   const [selectedFiles, setSelectedFiles] = useState([]);
