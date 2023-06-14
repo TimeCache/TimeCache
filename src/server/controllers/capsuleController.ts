@@ -28,6 +28,7 @@ export const capsuleController = {
     saveToDatabase: async (req, res, next) => {
 
         // TODO: create a new capsule in the database
+        const accessCode = res.locals.accessCode;
 
         try {
             const userId = req.user.id;  
@@ -35,12 +36,12 @@ export const capsuleController = {
             const { capsuleName, recipientName, recipientPhone, dueDate, inputText } = req.body;
     
             const query = `
-              INSERT INTO timeCapsules (userId, capsuleName, recipientName, recipientPhone, dueDate, inputText) 
-              VALUES ($1, $2, $3, $4, $5, $6) 
+              INSERT INTO timeCapsules (userId, capsuleName, recipientName, recipientPhone, dueDate, inputText, accessCode) 
+              VALUES ($1, $2, $3, $4, $5, $6, $7) 
               RETURNING *;
             `;
     
-            const values = [userId, capsuleName, recipientName, recipientPhone, dueDate, inputText];
+            const values = [userId, capsuleName, recipientName, recipientPhone, dueDate, inputText, accessCode];
     
             const { rows } = await pool.query(query, values);
     
@@ -72,7 +73,7 @@ export const capsuleController = {
         const { recipientPhone, dueDate, id: capsuleId } = req.body; 
 
         // set up a cron job
-        const task = cron.schedule(`0 * * *`, async () => {
+        const task = cron.schedule('0 * * * *', async () => {
           const now = new Date();
 
           if (now >= new Date(dueDate)) {
