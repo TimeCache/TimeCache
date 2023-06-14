@@ -18,9 +18,8 @@ export default function App() {
           </button>
         </div>
       </div>
-      <Capsule/>
-      <a href="http://localhost:3000/auth/google">Sign In with Google</a>
 
+      <a href="http://localhost:3000/auth/google">Sign In with Google</a>
     </div>
   )
 }

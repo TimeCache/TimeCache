@@ -17,11 +17,42 @@ export const capsuleController = {
         console.log('access code generated!')
         next();
     },
-
+    
+    ensureAuthenticated: (req, res, next) => {
+        if (req.isAuthenticated()) {
+            return next();
+        }
+        res.status(401).json({ error: "User not authenticated" });
+    },
+    
     saveToDatabase: async (req, res, next) => {
 
         // TODO: create a new capsule in the database
-        // TODO: save the new access code from res.locals.accessCode 
+
+        try {
+            const userId = req.user.id;  
+            console.log("YOOOOO", req.user)
+            const { capsuleName, recipientName, recipientPhone, dueDate, inputText } = req.body;
+    
+            const query = `
+              INSERT INTO timeCapsules (userId, capsuleName, recipientName, recipientPhone, dueDate, inputText) 
+              VALUES ($1, $2, $3, $4, $5, $6) 
+              RETURNING *;
+            `;
+    
+            const values = [userId, capsuleName, recipientName, recipientPhone, dueDate, inputText];
+    
+            const { rows } = await pool.query(query, values);
+    
+            // save the access code in res.locals for the next middleware
+            res.locals.capsuleId = rows[0].id;
+    
+            console.log('new capsule saved to database!')
+            next();
+    
+        } catch (err) {
+            next(err);
+        }
                 
         console.log('new capsule saved to database!')
         next();
