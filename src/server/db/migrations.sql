@@ -16,8 +16,8 @@ CREATE TABLE sessions (
 CREATE TABLE timeCapsules (
   id SERIAL PRIMARY KEY,
   userId INT NOT NULL,
+  capsuleName VARCHAR(255) NOT NULL
   recipientName VARCHAR(255) NOT NULL,
-  recipientEmail VARCHAR(255) NOT NULL,
   recipientPhone VARCHAR(15),
   dueDate TIMESTAMP NOT NULL,
   inputText VARCHAR(255),
