@@ -3,58 +3,46 @@ import { useState } from "react";
 import './styles/index.css'
 
 export default function Capsule() {
-
   const [selectedFiles, setSelectedFiles] = useState([]);
+  // some stuff
 
-  async function submit(event: any){
+  const handleFileChange = (event: any) => {
+
+    setSelectedFiles([...event.target.files]);
+    console.log(selectedFiles)
+  };
+
+  function submit(event: any){
+    const formData = new FormData(event.target);
     event.preventDefault()
-
-    const formData = new FormData(event.target)
+    const uploadData = new FormData()
 
     const capsuleData = {}
-
     for (const value of formData.entries()) {
       if (value[0] !== 'file') {
         capsuleData[value[0]] = value[1]
-      }
+      } 
     }
 
-    try {
+    selectedFiles.forEach((file) => {
+      uploadData.append('files', file);
+    });
 
-      await fetch('/capsules', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(capsuleData)
+
+
+
+    fetch('/capsules', {
+      method: 'POST',
+      body: uploadData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
       })
-
-    } catch(error) {
-      console.log(`${error} in the POST for capsules`)
-    }
-
-    // const handleFileChange = (event: any) => {
-    //   setSelectedFiles([...event.target.files]);
-    //   console.log(selectedFiles)
-    // };
-
-    // const handleUpload = () => {
-    //   const formData = new FormData();
-    //   selectedFiles.forEach((file) => {
-    //     formData.append('files', file);
-    //   });
-    //   fetch('/capsules/upload', {
-    //     method: 'POST',
-    //     body: formData,
-    //   })
-    //     .then((response) => response.json())
-    //     .then((data) => {
-    //       console.log(data);
-    //     })
-    //     .catch((error) => {
-    //       console.error('Error uploading files:', error);
-    //     });
-    // };
-
-    
+      .catch((error) => {
+        console.error('Error uploading files:', error);
+      });
+    // console.log(event.target.name.value, event.target.setDate.value)
   }
 
   return (
@@ -93,7 +81,7 @@ export default function Capsule() {
           </div>
           <div className="p-3">
           <label className="font-mono">
-            <input type="file" multiple name="file" className="file-input file-input-bordered file-input-secondary w-full max-w-xs"></input>
+            <input type="file" multiple name="file" onChange={handleFileChange} className="file-input file-input-bordered file-input-secondary w-full max-w-xs"></input>
           </label>
           </div>
           <div className="p-3">
