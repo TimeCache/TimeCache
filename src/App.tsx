@@ -6,6 +6,8 @@ export default function App() {
   return (
     <div>
       some changed text, yooo
+      <a href="http://localhost:3000/auth/google">Sign In with Google</a>
+
     </div>
   )
 }

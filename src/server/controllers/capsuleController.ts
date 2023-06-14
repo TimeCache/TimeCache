@@ -1,7 +1,10 @@
 import crypto from 'crypto';
-const pool = require('./db');
 const cron = require('node-cron');
 const twilio = require('twilio');
+import pool from '../db';
+require('dotenv').config();
+
+
 const twilioClient = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
 export const capsuleController = {
@@ -11,9 +14,6 @@ export const capsuleController = {
 
     generateAccessCode: (req, res, next) => {
         res.locals.accessCode = crypto.randomBytes(16).toString('hex');
-
-
-
         console.log('access code generated!')
         next();
     },
@@ -53,7 +53,7 @@ export const capsuleController = {
               to: recipientPhone
             });
 
-            // Stop the cron job when the due date has been reached
+            // stop the cron job when the due date has been reached
             task.destroy();  
 
             // update the status of the capsule in the database
@@ -63,8 +63,7 @@ export const capsuleController = {
         }, {
           scheduled: false
         });
-
-          // Start the cron job
+        
         task.start();
 
         console.log('countdown activated!')
