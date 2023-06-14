@@ -6,14 +6,13 @@ import FetchS3 from './FetchS3';
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import Capsule from './Capsule';
-import '../index.css'
 
 const HomePage: React.FC = () => {
   const [email, setEmail] = useState('');
   const [contactName, setContactName] = useState('');
   const [contactMessage, setContactMessage] = useState('');
   const [loaded, setLoaded] = useState(false)
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const handleUploadClick = () => {
     // Handle upload click
