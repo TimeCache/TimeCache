@@ -6,6 +6,7 @@ import FetchS3 from './FetchS3';
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import Capsule from './Capsule';
+import '../index.css'
 
 const HomePage: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -72,7 +73,9 @@ const HomePage: React.FC = () => {
       </main>
       <FetchS3/>
       {loaded && <Capsule/>}
- 
+      <div>
+        <Capsule/>
+      </div>
       <footer className="footer">
         <p>&copy; 2023 Time Capsule</p>
       </footer>

@@ -11,7 +11,7 @@ const UploadPage: React.FC = () => {
       reader.onabort = () => console.log('file reading was aborted');
       reader.onerror = () => console.log('file reading has failed');
       reader.onload = () => {
-        // Do whatever you want with the file contents
+        
         const binaryStr = reader.result;
         console.log(binaryStr);
       };
@@ -23,7 +23,6 @@ const UploadPage: React.FC = () => {
 
   return (
     <div className="container">
-        <h1>Your Time Capsule !</h1>
       <div {...getRootProps()} className="dropzone">
         <input {...getInputProps()} />
         {
