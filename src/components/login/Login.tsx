@@ -4,14 +4,13 @@ import React from 'react';
 
 export default function Login() {
     
-    const handleLogin = () => {
-        console.log('hey')
-    }
+
 
     return (
         <div>
             <h2>Login</h2>
-            <button onClick={handleLogin}>Login</button>
+            <button><a href="http://localhost:3000/auth/google">Sign In with Google</a></button>
+
         </div>
     )
 }
