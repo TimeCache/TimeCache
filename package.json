@@ -10,6 +10,13 @@
     "@types/react-redux": "^7.1.25",
     "autoprefixer": "^10.4.14",
     "cors": "^2.8.5",
+    "dotenv": "^16.1.4",
+    "pg": "^8.11.0",
+    "express-session": "^1.17.3",
+    "node-cron": "^3.0.2",
+    "nodemon": "^2.0.22",
+    "passport": "^0.6.0",
+    "passport-google-oauth20": "^2.0.0",
     "pg": "^8.11.0",
     "nodemon": "^2.0.22",
     "postcss": "^8.4.24",
@@ -18,7 +25,8 @@
     "react-redux": "^8.1.0",
     "react-router-dom": "^6.12.1",
     "twilio": "^4.11.2",
-    "redux": "^4.2.1"
+    "redux": "^4.2.1",
+    "ts-node": "^10.9.1"
   },
   "devDependencies": {
     "@babel/core": "^7.22.5",
