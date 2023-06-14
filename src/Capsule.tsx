@@ -51,25 +51,37 @@ export default function Capsule() {
         <form onSubmit={submit} className="join join-vertical">
           <div className="p-3">
         <label className="font-mono">
+            Capsule Name
+            <input type="text" name="capsuleName" className="input input-bordered input-secondary w-full max-w-xs"></input>
+          </label>
+          </div>
+          <div className="p-3">
+        <label className="font-mono">
             Recipient Name
-            <input type="text" id="name" className="input input-bordered input-secondary w-full max-w-xs"></input>
+            <input type="text" name="recipientName" className="input input-bordered input-secondary w-full max-w-xs"></input>
+          </label>
+          </div>
+          <div className="p-3">
+        <label className="font-mono">
+          Recipient Phone
+            <input type="tel" name="phone" className="input input-bordered input-secondary w-full max-w-xs"></input>
           </label>
           </div>
           <div className="p-3">
           <label className="font-mono">
             Message
-            <input type="text" id="message" className="input input-bordered input-secondary w-full max-w-xs"></input>
+            <input type="text" name="message" className="input input-bordered input-secondary w-full max-w-xs"></input>
           </label>
           </div>
           <div className="p-3">
           <label className="font-mono">
             Set Date
-            <input type="date" id="setDate" className="input input-bordered input-secondary w-full max-w-xs"></input>
+            <input type="date" name="setDate" className="input input-bordered input-secondary w-full max-w-xs"></input>
           </label>
           </div>
           <div className="p-3">
           <label className="font-mono">
-            <input type="file" id="file" multiple onChange={handleFileChange} className="file-input file-input-bordered file-input-secondary w-full max-w-xs"></input>
+            <input type="file" multiple name="file" onChange={handleFileChange} className="file-input file-input-bordered file-input-secondary w-full max-w-xs"></input>
           </label>
           </div>
           <div className="p-3">
