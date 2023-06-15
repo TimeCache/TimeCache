@@ -54,9 +54,6 @@ export const capsuleController = {
         } catch (err) {
             next(err);
         }
-                
-        console.log('new capsule saved to database!')
-        next();
     },
 
     sendToS3: async (req, res, next) => {

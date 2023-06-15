@@ -29,7 +29,7 @@ const router = express.Router();
 
 router.post('/upload', upload.array('files'), (req: any, res: any) => {
   const files = req.files;
-  console.log(files)
+  // console.log(files)
 
   files.forEach((file: any) => {
     // console.log(file)
