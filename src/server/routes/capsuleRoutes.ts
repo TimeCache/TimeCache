@@ -23,11 +23,11 @@ const s3 = new AWS.S3({
 
 
 const router = express.Router();
-router.get('/', capsuleController.getMyCapsule, async (req, res) => { 
+// router.get('/', capsuleController.getMyCapsule, async (req, res) => { 
     
-})
+// })
 
-router.post('/', upload.array('files'), (req: any, res: any) => {
+router.post('/upload', upload.array('files'), (req: any, res: any) => {
   const files = req.files;
   console.log(files)
 
@@ -58,6 +58,9 @@ router.post('/', upload.array('files'), (req: any, res: any) => {
   res.json({ message: 'Files uploaded successfully' });
 });
 
+router.post('/', capsuleController.ensureAuthenticated, capsuleController.generateAccessCode, capsuleController.saveToDatabase, async (req:any, res:any) => {
+   res.sendStatus(200)
+})
 
     // generate a random password
     // send all of the capsule info to the database

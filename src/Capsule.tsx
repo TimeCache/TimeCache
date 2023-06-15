@@ -28,12 +28,21 @@ export default function Capsule() {
       uploadData.append('files', file);
     });
 
-
-
-
+    fetch('/capsules/upload', {
+      method: 'POST',
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error('Error uploading files:', error);
+      });
+    // console.log(event.target.name.value, event.target.setDate.value)
     fetch('/capsules', {
       method: 'POST',
-      body: uploadData,
+      body: event.target,
     })
       .then((response) => response.json())
       .then((data) => {
@@ -44,6 +53,8 @@ export default function Capsule() {
       });
     // console.log(event.target.name.value, event.target.setDate.value)
   }
+
+
 
   return (
     <div>
