@@ -9,10 +9,10 @@ export default function Capsule() {
   const handleFileChange = (event: any) => {
 
     setSelectedFiles([...event.target.files]);
-    console.log(selectedFiles)
+    console.log("selectedFiles", selectedFiles)
   };
 
-  function submit(event: any){
+  async function submit(event: any){
     const formData = new FormData(event.target);
     event.preventDefault()
     const uploadData = new FormData()
@@ -28,21 +28,35 @@ export default function Capsule() {
       uploadData.append('files', file);
     });
 
+    for (const value of formData.entries()) {
+      if (value[0] !== 'file') {
+        capsuleData[value[0]] = value[1]
+      }
+    }
+
+    try {
+      await fetch('/capsules', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(capsuleData)
+      })
+
+    } catch(error) {
+      console.log(`${error} in the POST for capsules`)
+    }
 
 
-
-    fetch('/capsules', {
+    fetch('/capsules/upload', {
       method: 'POST',
       body: uploadData,
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        console.log("data", data);
       })
       .catch((error) => {
         console.error('Error uploading files:', error);
       });
-    // console.log(event.target.name.value, event.target.setDate.value)
   }
 
   return (

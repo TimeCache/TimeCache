@@ -8,8 +8,9 @@ const router = express.Router();
 router.get('/google', passport.authenticate('google', {
     scope: ['profile', 'email']  
   }));
-  
-router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/login' }),
+
+// ! Testing to see if failureRedirect to '/' helps 
+router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/' }),
     (req:any, res) => {
       console.log('logged in!');
       console.log(req.user)

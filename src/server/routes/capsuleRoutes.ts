@@ -9,23 +9,27 @@ const AWS = require('aws-sdk');
 
 const accessKeyId = process.env.AWS_ACCESS_KEY_ID
 const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY
+const region = process.env.AWS_REGION
 
 
 const s3 = new AWS.S3({
-  accessKeyId,
-  secretAccessKey
-})
+  region,
+  credentials: {
+    accessKeyId,
+    secretAccessKey
+  }
+});
 
 
 
 const router = express.Router();
-router.get('/', capsuleController.getMyCapsule, async (req, res) => { 
+// router.get('/', capsuleController.getMyCapsule, async (req, res) => { 
     
-})
+// })
 
-router.post('/', upload.array('files'), (req: any, res: any) => {
+router.post('/upload', upload.array('files'), (req: any, res: any) => {
   const files = req.files;
-  console.log(files)
+  // console.log(files)
 
   files.forEach((file: any) => {
     // console.log(file)
@@ -35,6 +39,7 @@ router.post('/', upload.array('files'), (req: any, res: any) => {
       Bucket: 'timecache',
       Key: file.originalname,
       Body: fileStream,
+      ContentType: 'image/jpeg',
     };
 
     s3.upload(params, (err: any, data: any) => {
@@ -42,14 +47,22 @@ router.post('/', upload.array('files'), (req: any, res: any) => {
         console.error('Error uploading file to S3:', err);
         return res.status(500).json({ error: 'Failed to upload file to S3' });
       }
+      //TODO: Once finished uploading, store the image to database under the randompassword capsule key
+      //TODO: bucket: name of bucket, region: us-east-1, key file.originalname
+      //const link = `https://${bucket}.s3.amazonaws.com/${key}`
+      //lskjfa;lkejfl:[array of links]
+      console.log('File uploaded to S3:', data.Location);
 
-      // console.log('File uploaded to S3:', data.Location);
+      // add array 'fileLocations' query here?
     });
   });
 
   res.json({ message: 'Files uploaded successfully' });
 });
 
+router.post('/', capsuleController.ensureAuthenticated, capsuleController.generateAccessCode, capsuleController.saveToDatabase, async (req:any, res:any) => {
+   res.sendStatus(200)
+})
 
     // generate a random password
     // send all of the capsule info to the database

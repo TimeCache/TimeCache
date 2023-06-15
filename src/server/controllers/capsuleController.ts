@@ -32,7 +32,7 @@ export const capsuleController = {
 
         try {
             const userId = req.user.id;  
-            console.log("YOOOOO", req.user)
+            // console.log("YOOOOO", req.user)
             const { capsuleName, recipientName, recipientPhone, dueDate, inputText } = req.body;
     
             const query = `
@@ -54,9 +54,6 @@ export const capsuleController = {
         } catch (err) {
             next(err);
         }
-                
-        console.log('new capsule saved to database!')
-        next();
     },
 
     sendToS3: async (req, res, next) => {
