@@ -52,6 +52,8 @@ router.post('/upload', upload.array('files'), (req: any, res: any) => {
       //const link = `https://${bucket}.s3.amazonaws.com/${key}`
       //lskjfa;lkejfl:[array of links]
       console.log('File uploaded to S3:', data.Location);
+
+      // add array 'fileLocations' query here?
     });
   });
 
