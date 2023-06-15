@@ -4,7 +4,14 @@ import './styles/index.css'
 
 export default function Capsule() {
   const [selectedFiles, setSelectedFiles] = useState([]);
-  // some stuff
+  const [formState, setFormState] = useState({
+    capsuleName: '',
+    recipientName: '',
+    recipientPhone: '',
+    message: '',
+    dueDate: ''
+  })
+
 
   const handleFileChange = (event: any) => {
 
@@ -41,6 +48,15 @@ export default function Capsule() {
         body: JSON.stringify(capsuleData)
       })
 
+      setFormState({
+        capsuleName: '',
+        recipientName: '',
+        recipientPhone: '',
+        message: '',
+        dueDate: ''
+      });
+
+
     } catch(error) {
       console.log(`${error} in the POST for capsules`)
     }
@@ -66,31 +82,31 @@ export default function Capsule() {
           <div className="p-3">
         <label className="font-mono">
             Capsule Name
-            <input type="text" name="capsuleName" className="input input-bordered input-secondary w-full max-w-xs"></input>
+            <input type="text" name="capsuleName" value={formState.capsuleName} onChange={(event) => setFormState({ ...formState, capsuleName: event.target.value })} className="input input-bordered input-secondary w-full max-w-xs"></input>
           </label>
           </div>
           <div className="p-3">
         <label className="font-mono">
             Recipient Name
-            <input type="text" name="recipientName" className="input input-bordered input-secondary w-full max-w-xs"></input>
+            <input type="text" name="recipientName" value={formState.recipientName} onChange={(event) => setFormState({ ...formState, recipientName: event.target.value })} className="input input-bordered input-secondary w-full max-w-xs"></input>
           </label>
           </div>
           <div className="p-3">
         <label className="font-mono">
           Recipient Phone
-            <input type="tel" name="recipientPhone" className="input input-bordered input-secondary w-full max-w-xs"></input>
+            <input type="tel" name="recipientPhone" value={formState.recipientPhone} onChange={(event) => setFormState({ ...formState, recipientPhone: event.target.value })} className="input input-bordered input-secondary w-full max-w-xs"></input>
           </label>
           </div>
           <div className="p-3">
           <label className="font-mono">
             Message
-            <input type="text" name="message" className="input input-bordered input-secondary w-full max-w-xs"></input>
+            <input type="text" name="message" value={formState.message} onChange={(event) => setFormState({ ...formState, message: event.target.value })} className="input input-bordered input-secondary w-full max-w-xs"></input>
           </label>
           </div>
           <div className="p-3">
           <label className="font-mono">
             Set Date
-            <input type="date" name="dueDate" className="input input-bordered input-secondary w-full max-w-xs"></input>
+            <input type="date" name="dueDate" value={formState.dueDate} onChange={(event) => setFormState({ ...formState, dueDate: event.target.value })} className="input input-bordered input-secondary w-full max-w-xs"></input>
           </label>
           </div>
           <div className="p-3">
