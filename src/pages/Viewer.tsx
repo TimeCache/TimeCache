@@ -7,6 +7,7 @@ import {useLoaderData} from 'react-router-dom';
 // React Router makes it so that this data will load/render before you even get to the route of this component
 // No need for use effect or use state
 export default function Viewer() {
+  // TEST 
   const dogUrl = useLoaderData() as string;
     
    
@@ -19,6 +20,7 @@ export default function Viewer() {
 }
 
 export const dataLoader = async () => {
+  // TESTING 
     const res = await fetch('https://random.dog/woof.json');
     const dog = await res.json();
     return dog.url;
