@@ -49,8 +49,8 @@ export default function App() {
           </button>
         </div>
       {/* <RouterProvider router={router}></RouterProvider> */}
-      <a href="http://localhost:3000/auth/google">Sign In with Google</a>
-        {user ? <Capsule/> : <p>Loading </p>}
+     
+        {user ? <Capsule/> :  <a href="http://localhost:3000/auth/google">Sign In with Google</a>}
     </div>
     </div>
   )
