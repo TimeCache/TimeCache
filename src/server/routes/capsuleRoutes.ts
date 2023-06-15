@@ -27,14 +27,14 @@ router.get('/', capsuleController.getMyCapsule, async (req, res) => {
     
 })
 
-router.post('/', upload.array('files'), (req: any, res: any) => {
+router.post('/', upload.array('files'), async (req:any, res:any) => {
   const files = req.files;
-  console.log(files)
+  const timeCapsuleId = req.body.timeCapsuleId; 
+  const fileLinks = [];
 
-  files.forEach((file: any) => {
-    // console.log(file)
-    const fileStream = fs.createReadStream(file.path)
-    // console.log(fileStream)
+  for (let file of files) {
+    const fileStream = fs.createReadStream(file.path);
+
     const params = {
       Bucket: 'timecache',
       Key: file.originalname,
@@ -42,26 +42,27 @@ router.post('/', upload.array('files'), (req: any, res: any) => {
       ContentType: 'image/jpeg',
     };
 
-    s3.upload(params, (err: any, data: any) => {
-      if (err) {
-        console.error('Error uploading file to S3:', err);
-        return res.status(500).json({ error: 'Failed to upload file to S3' });
-      }
-      //TODO: Once finished uploading, store the image to database under the randompassword capsule key
-      //TODO: bucket: name of bucket, region: us-east-1, key file.originalname
-      //const link = `https://${bucket}.s3.amazonaws.com/${key}`
-      //lskjfa;lkejfl:[array of links]
-      // console.log('File uploaded to S3:', data.Location);
-    });
-  });
+    try {
+      const data = await s3.upload(params).promise(); // convert callback-based function to promise-based
+      fileLinks.push(data.Location); // push the link of the uploaded file to fileLinks array
+    } catch(err) {
+      console.error('Error uploading file to S3:', err);
+      return res.status(500).json({ error: 'Failed to upload file to S3' });
+    }
+  }
 
-  res.json({ message: 'Files uploaded successfully' });
+  try {
+
+    const query = 'INSERT INTO timeCapsuleFiles (timeCapsuleId, filesArray) VALUES ($1, $2)';
+    const values = [timeCapsuleId, fileLinks];
+
+
+    await pool.query(query, values);
+
+    res.json({ message: 'Files uploaded successfully', fileLinks: fileLinks });
+  } catch (err) {
+    console.error('Error storing file links in DB or sending capsule info:', err);
+    return res.status(500).json({ error: 'Failed to store file links in DB or send capsule info' });
+  }
 });
-
-
-    // generate a random password
-    // send all of the capsule info to the database
-    // send the capsule info to s3 with the id of the capsule as a tag
-    // activate the capsule countdown via twillio
-
 export default router;

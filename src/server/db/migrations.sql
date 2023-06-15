@@ -21,7 +21,15 @@ CREATE TABLE timeCapsules (
   recipientPhone VARCHAR(15),
   dueDate TIMESTAMP NOT NULL,
   inputText VARCHAR(255),
-  accessCode VARCHAR(255) NOT NULL,
+  accessCode VARCHAR(255) NOT NULL, 
   status VARCHAR(255) DEFAULT 'pending';
   FOREIGN KEY (userId) REFERENCES users(id)
+);
+
+CREATE TABLE timeCapsuleFiles (
+  id SERIAL PRIMARY KEY,
+  timeCapsuleId INT NOT NULL,
+  accessCode VARCHAR(255) NOT NULL, 
+  filesArray TEXT[] NOT NULL,
+  FOREIGN KEY (timeCapsuleId) REFERENCES timeCapsules(id)
 );
